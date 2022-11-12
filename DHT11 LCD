@@ -1,1 +1,10 @@
+#include <LiquidCrystal.h>
+
+const int rs = , en = , D4 = , D5 = , D6 = , D7 = ;
+LiquidCrystal lcd(rs, en, D4, D5, D6, D7);
+
+
+void setup()
+{
+lcd.begin()
 
