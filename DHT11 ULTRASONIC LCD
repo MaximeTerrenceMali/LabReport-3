@@ -1,19 +1,21 @@
 /*these lines of C++ codes tells the arduino to transmit the data from the ultrasonic sensor and humidity data from a DHT11 onto a LCD
 
-// hook up HC-SRO4 with trig pin to arduino pin 3, echo to arduino pin 2
+// connect the HC-SRO4 Pins to Arduino digital Output pins
 #define trigPin 3
 #define echoPin 2
- #include <Adafruit_Sensor.h>
+ //Include the Ultrasensor library from Adafruit
+ #include <Adafruit_Sensor.h> 
 #include <DHT.h>
 #include <DHT_U.h>
-#include <LiquidCrystal.h>// include the library code:
+// include the library code for LCD within Arduino
+#include <LiquidCrystal.h>
  float duration, distance;
-#include <LiquidCrystal.h>// include the library code:
-const int rs = 7, en = 8, d4 = 9, d5 = 10, d6 = 11, d7 = 12;// the pins on arduino corresponding to those of the LCD:
+#include <LiquidCrystal.h>/
+const int rs = 7, en = 8, d4 = 9, d5 = 10, d6 = 11, d7 = 12;//this initializes the LCD pins onto the Arduino
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
-
-#define DHTPIN 4     // Digital pin connected to the DHT sensor 
-#define DHTTYPE    DHT11     // DHT 11
+//Define both pin connected to the DHT and the Type of DHT being used in circuit
+#define DHTPIN 4      
+#define DHTTYPE    DHT11     
 DHT_Unified dht(DHTPIN, DHTTYPE);
 uint32_t delayMS;
 
@@ -24,7 +26,7 @@ void setup() {
  
  dht.begin();
   lcd.println(F("DHTxx Unified Sensor Example"));
-  // Print humidity sensor details.
+  // Display the Humidity Data gained from the DHT11 onto the LCD
    sensor_t sensor;
   dht.humidity().getSensor(&sensor);
   lcd.println(F("Humidity Sensor"));
@@ -35,7 +37,7 @@ void setup() {
   lcd.print  (F("Min Value:   ")); lcd.print(sensor.min_value); lcd.println(F("%"));
   lcd.print  (F("Resolution:  ")); lcd.print(sensor.resolution); lcd.println(F("%"));
   lcd.println(F("------------------------------------"));
-  // Set delay between sensor readings based on sensor details.
+  // Put value for delayMS 
   delayMS = sensor.min_delay / 1000;
 }
 
@@ -43,9 +45,9 @@ void loop() {
  
 
 
-  // Delay between measurements.
+  // Put a delay of time between the displays of measurements for smoother display
   delay(delayMS);
-  // Get temperature event and print its value.
+  // Print the data of the Temperature Event
   sensors_event_t event;
   
   // Get humidity event and print its value.
@@ -70,15 +72,12 @@ digitalWrite(trigPin, HIGH);
 delayMicroseconds(10);
 digitalWrite(trigPin, LOW);
 
-//measure the response from the HC-SR04 echo pin
+//measure the data received from the Echopin of the Ultrasensor
 duration = pulseIn(echoPin, HIGH);
-
-//determine distance from duration
-//use 343 meters per sec as speed of sound
 
 distance =(duration / 2) * 0.0343;
 
-//send results to serialmonitor
+//send the Distance data to LCD
 lcd.print("Distance = ");
 if (distance >= 400 || distance <= 2){
   lcd.println("Out of range");
