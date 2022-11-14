@@ -1,10 +1,46 @@
+//Includes the wire library for LCD
 #include <LiquidCrystal.h>
-
-const int rs = , en = , D4 = , D5 = , D6 = , D7 = ;
+const int rs = 0, en = 2, D4 = 4, D5 = 5, D6 = 6, D7 = 7;
 LiquidCrystal lcd(rs, en, D4, D5, D6, D7);
-
+//Set up DHT sensor for 16mhz Arduino
+DHT dht(DHTPIN, DHTTYPE);
+//Identifies the output pin connection and type of DHT
+#define  DHTPIN 7 
+#define DHTTYPE DHT11
 
 void setup()
 {
-lcd.begin()
+Serial.begin(9600);
+Serial.println(F("DHTxx Test!);
+dht.begin();
+}
 
+voidloop()
+{
+delay(2000);
+//Define variables
+float h = dht.readHumidity(); // Stores Humuduty value in percent and reads it
+float t = dht.readTemperature(); //Stores Temperature value in percent and reads it
+float f = dht.readTemperature(true); //f is in case if the Temperature Values in percentage that's being read is true
+
+if (isnan(h) || isnan(t) || isnan(f))
+{
+;Serial.println (F "Failed to read from DHT sensor");
+return;
+}
+
+float hif = dht.computeHeatIndex(f,h);
+float hif = dht.computeHeatIndex(t, h, false);
+
+Serial.print(F("Humidity: "));
+Serial.print(h);
+Serial.print(F("% Temperature: "));
+Serial.print(t);
+Serial.print(F(" °C "));
+Serial.print(f);
+Serial.print(F("°F Heat Index: "));
+Serial.print(hic);
+Serial.print(F(" °C ");
+Serial.print(hif);
+Serial.print(F(" °F "));
+}
