@@ -1,3 +1,5 @@
+//By reading the output voltage from the Analog Outputpin connected from a known resistor,  the arduino calculates the resistance by using the voltage divider rule
+
 //Include the LCD library to the Arduino
 #include <LiquidCrystal.h>
 //initialize the following LCD pins: RS, EN, D4,D5,D6,D7 with the Arduino digital pins
