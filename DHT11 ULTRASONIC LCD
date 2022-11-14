@@ -1,4 +1,4 @@
-/*the purpose of this program is to display distance from the ultrasonic sensor and humidity on an lcd */
+/*these lines of C++ codes tells the arduino to transmit the data from the ultrasonic sensor and humidity data from a DHT11 onto a LCD
 
 // hook up HC-SRO4 with trig pin to arduino pin 3, echo to arduino pin 2
 #define trigPin 3
