@@ -1,3 +1,6 @@
+//This C++ code will transmit the Temperature and humidity data sensed by the DHT11 onto a LCD
+
+
 //Includes the wire library for LCD
 #include <LiquidCrystal.h>
 const int rs = 0, en = 2, D4 = 4, D5 = 5, D6 = 6, D7 = 7;
@@ -13,6 +16,8 @@ void setup()
 Serial.begin(9600);
 Serial.println(F("DHTxx Test!);
 dht.begin();
+lcd.begin(16,2);
+
 }
 
 voidloop()
@@ -43,4 +48,12 @@ Serial.print(hic);
 Serial.print(F(" °C ");
 Serial.print(hif);
 Serial.print(F(" °F "));
+ lcd.setCursor(0, 0);
+    lcd.print("Temperature: ");
+    lcd.print(t);
+lcd.setCursor(0, 1);
+    lcd.print("Humidity: ");
+    lcd.print(h);
+    delay(1000);
+
 }
